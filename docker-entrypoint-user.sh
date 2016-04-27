@@ -21,7 +21,7 @@ mo_count=$((try rabbitmqctl -t 1 list_users) | grep "$MONITOR_USER" | wc -l)
 
 rabbitmqctl set_permissions "$BACKEND_USER" dockci dockci dockci
 rabbitmqctl set_permissions "$FRONTEND_USER" '^$' '^$' '^dockci\.job\..+'
-rabbitmqctl set_permissions "$MONITOR_USER" '^$' '^$' '^aliveness_test$'
+rabbitmqctl set_permissions "$MONITOR_USER" '^$' '^$' '^aliveness-test$'
 rabbitmqctl set_user_tags "$MONITOR_USER" 'monitoring'
 
 try rabbitmqctl clear_password guest
