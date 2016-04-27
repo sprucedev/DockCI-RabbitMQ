@@ -13,11 +13,14 @@ function try {
 
 fe_count=$((try rabbitmqctl -t 1 list_users) | grep "$FRONTEND_USER" | wc -l)
 be_count=$((try rabbitmqctl -t 1 list_users) | grep "$BACKEND_USER" | wc -l)
+mo_count=$((try rabbitmqctl -t 1 list_users) | grep "$MONITOR_USER" | wc -l)
 
 [[ $fe_count == '0' ]] && rabbitmqctl add_user "$FRONTEND_USER" "$FRONTEND_PASSWORD"
 [[ $be_count == '0' ]] && rabbitmqctl add_user "$BACKEND_USER" "$BACKEND_PASSWORD"
+[[ $mo_count == '0' ]] && rabbitmqctl add_user "$MONITOR_USER" "$MONITOR_PASSWORD"
 
-rabbitmqctl set_permissions "$FRONTEND_USER" '^$' '^$' '^dockci\.job\..+'
 rabbitmqctl set_permissions "$BACKEND_USER" dockci dockci dockci
+rabbitmqctl set_permissions "$FRONTEND_USER" '^$' '^$' '^dockci\.job\..+'
+rabbitmqctl set_permissions "$MONITOR__USER" '^$' '^$' '^$'
 
 try rabbitmqctl clear_password guest
