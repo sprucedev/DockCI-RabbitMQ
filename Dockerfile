@@ -8,6 +8,5 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY docker-entrypoint-user.sh /docker-entrypoint-user.sh
 COPY rabbitmq.config /etc/rabbitmq/rabbitmq.config
 
-EXPOSE 15672
 EXPOSE 15674
 
