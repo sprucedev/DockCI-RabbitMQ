@@ -24,4 +24,4 @@ rabbitmqctl set_permissions "$FRONTEND_USER" '^$' '^$' '^dockci\.job\..+'
 rabbitmqctl set_permissions "$MONITOR_USER" "$MONITOR_PERM_C" "$MONITOR_PERM_W" "$MONITOR_PERM_R"
 rabbitmqctl set_user_tags "$MONITOR_USER" 'monitoring'
 
-try rabbitmqctl clear_password guest
+[[ "$KEEP_GUEST" == '1' ]] || try rabbitmqctl clear_password guest
